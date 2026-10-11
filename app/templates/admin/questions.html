@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Vragen · Beheer{% endblock %}
+{% block content %}
+{% set section = 'vragen' %}{% include "admin/_subnav.html" %}
+<div class="card">
+  <div class="row" style="justify-content:space-between">
+    <h2 style="margin:0">Vragenbank</h2>
+    <form method="post" action="/admin/vragen/nieuw"><button class="btn small" type="submit">Nieuwe vraag</button></form>
+  </div>
+  <ul class="list" style="margin-top:10px">
+    {% for q in questions %}
+    <li>
+      <a class="item" href="/admin/vraag/{{ q.id }}">{{ q.position }}. {{ q.title }}</a>
+      {% if not q.active %}<span class="badge">inactief</span>
+      {% elif q.round %}<span class="badge good">ronde {{ q.round.number }}</span>
+      {% else %}<span class="badge accent">ongepland</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<form method="post" action="/admin/vragen/import" onsubmit="return confirm('De 20 standaardvragen (opnieuw) toevoegen?')">
+  <button class="btn ghost" type="submit">Standaardset van 20 vragen toevoegen</button>
+</form>
+{% endblock %}

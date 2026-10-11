@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}De avond · filosofie app{% endblock %}
+{% block content %}
+{% if not ev %}
+<div class="card hero">
+  <div class="eyebrow">De avond</div>
+  <h1>Nog geen avond geprikt</h1>
+  <p class="muted" style="margin:0">Zodra er een datum geprikt is, zie je hem hier en krijg je een melding.</p>
+</div>
+{% else %}
+<div class="card hero">
+  <div class="eyebrow">Volgende avond</div>
+  <h1>{{ ev.starts_at | dt }}</h1>
+</div>
+
+<div class="card">
+  <h2>Ben je erbij?</h2>
+  <form class="row" method="post" action="/avond/aanwezig" style="flex-wrap:nowrap">
+    <button class="btn {{ '' if attending is sameas true else 'secondary' }}" type="submit" name="attending" value="true">{{ '✓ ' if attending is sameas true }}Ja, ik kom</button>
+    <button class="btn {{ 'danger' if attending is sameas false else 'secondary' }}" type="submit" name="attending" value="false">{{ '✓ ' if attending is sameas false }}Nee</button>
+  </form>
+  <p class="small muted" style="margin:10px 0 0">
+    {% if coming %}{{ coming | length }} {{ 'komt' if coming | length == 1 else 'komen' }}: {{ coming | join(', ') }}{% else %}Nog niemand heeft zich aangemeld.{% endif %}
+  </p>
+</div>
+
+<form class="card" id="onderwerpen" method="post" action="/avond/onderwerpen">
+  <h2>Waar wil je over praten?</h2>
+  <p class="small muted">Kies maximaal {{ max_topics }} vragen die je het interessantst vindt om te bespreken.</p>
+  {% if questions %}
+  <div class="choices" data-max="{{ max_topics }}">
+    {% for q in questions %}
+    <label class="choice"><input type="checkbox" name="question_id" value="{{ q.id }}" {{ 'checked' if q.id in my_topics }}>
+      <span><strong>{{ q.title }}</strong><br><span class="small muted clamp">{{ q.scenario }}</span></span></label>
+    {% endfor %}
+  </div>
+  <button class="btn" type="submit">Keuze opslaan</button>
+  {% else %}
+  <p class="muted" style="margin:0">Er zijn nog geen vragen gesteld.</p>
+  {% endif %}
+</form>
+
+<form class="card" id="inbreng" method="post" action="/avond/inbreng">
+  <h2>Zelf iets inbrengen?</h2>
+  <p class="small muted">Een vraag die je de groep wilt stellen, of een inzicht dat je wilt delen. De andere deelnemers zien niet wat je instuurt.</p>
+  <div class="row" style="flex-wrap:nowrap">
+    {% for key, label in kinds.items() %}
+    <label class="choice" style="flex:1"><input type="radio" name="kind" value="{{ key }}" {{ 'checked' if loop.first }}><span class="center">{{ label }}</span></label>
+    {% endfor %}
+  </div>
+  <label class="field" for="text">Jouw inbreng</label>
+  <textarea id="text" name="text" maxlength="1000" required data-count="text-count" placeholder="Bijv. kun je een betekenisvol leven leiden zonder ergens in te geloven?"></textarea>
+  <div class="counter" id="text-count"></div>
+  <button class="btn" type="submit" style="margin-top:8px">Insturen</button>
+  {% if mine %}
+  <h3 style="margin-top:18px">Jouw inbreng</h3>
+  <ul class="list">
+    {% for c in mine %}
+    <li style="align-items:flex-start">
+      <div style="flex:1"><div class="small muted">{{ c.kind_label }}</div>{{ c.text }}</div>
+      <button class="btn ghost small" type="submit" formaction="/avond/inbreng/{{ c.id }}/verwijder" formnovalidate>Verwijder</button>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</form>
+{% endif %}
+{% endblock %}

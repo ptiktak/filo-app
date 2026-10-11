@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Avond · Beheer{% endblock %}
+{% block content %}
+{% set section = 'avond' %}{% include "admin/_subnav.html" %}
+
+{% if ev %}
+<div class="card hero">
+  <div class="eyebrow">{{ 'Geselecteerde avond' if ev.starts_at < now else 'Volgende avond' }}</div>
+  <h1>{{ ev.starts_at | dt }}</h1>
+</div>
+
+<div class="card">
+  <h2>Aanwezigheid</h2>
+  <p><span class="badge good">Ja · {{ yes | length }}</span> {{ yes | join(', ') or '–' }}</p>
+  <p><span class="badge bad">Nee · {{ no | length }}</span> {{ no | join(', ') or '–' }}</p>
+  <p style="margin:0"><span class="badge">Nog niet gereageerd · {{ unknown | length }}</span> {{ unknown | join(', ') or '–' }}</p>
+</div>
+
+<div class="card">
+  <h2>Meest interessante vragen</h2>
+  {% for title, names in topics %}
+  <div class="leader"><span class="rank">{{ names | length }}×</span><span>{{ title }}<br><span class="small muted">{{ names | join(', ') }}</span></span><span></span></div>
+  {% else %}
+  <p class="muted" style="margin:0">Nog geen keuzes.</p>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <h2>Inbreng</h2>
+  <div class="stack">
+    {% for c in contributions %}
+    <blockquote>{{ c.text }}<footer>{{ c.kind_label }} · {{ c.user.name }}</footer></blockquote>
+    {% else %}
+    <p class="muted" style="margin:0">Nog niets ingestuurd.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<details class="card">
+  <summary>Datum aanpassen of avond verwijderen</summary>
+  <form method="post" action="/admin/avond/{{ ev.id }}" style="margin-top:12px">
+    <label class="field" for="e_start">Datum en tijd</label>
+    <input id="e_start" name="starts_at" type="datetime-local" value="{{ ev.starts_at | dt_input }}" required>
+    <button class="btn secondary" type="submit" style="margin-top:12px">Opslaan</button>
+  </form>
+  <form method="post" action="/admin/avond/{{ ev.id }}/verwijder" onsubmit="return confirm('Deze avond en alle aanmeldingen verwijderen?')" style="margin-top:10px">
+    <button class="btn danger" type="submit">Avond verwijderen</button>
+  </form>
+</details>
+{% endif %}
+
+<form class="card" method="post" action="/admin/avond/nieuw">
+  <h2>Avond prikken</h2>
+  <label class="field" for="starts_at">Datum en tijd</label>
+  <input id="starts_at" name="starts_at" type="datetime-local" value="{{ default_start }}" required>
+  <label class="check"><input type="checkbox" name="notify" value="true" checked><span>Stuur iedereen een melding</span></label>
+  <button class="btn" type="submit">Prikken</button>
+</form>
+
+{% if evenings %}
+<div class="card">
+  <h2>Alle avonden</h2>
+  <ul class="list">
+    {% for e in evenings %}
+    <li><a class="item" href="/admin/avond?id={{ e.id }}">{{ e.starts_at | dt }}</a>
+      {% if ev and e.id == ev.id %}<span class="badge accent">bekijk je nu</span>{% elif e.starts_at < now %}<span class="badge">geweest</span>{% endif %}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

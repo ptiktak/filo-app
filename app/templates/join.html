@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card hero">
+  <div class="eyebrow">{{ 'Beheer' if admin else 'Je bent uitgenodigd' }}</div>
+  <h1>{{ 'Aanmelden als beheerder' if admin else 'Een maand lang denken, één avond praten.' }}</h1>
+  <p class="muted" style="margin:0">
+    {% if admin %}Met deze link krijg je toegang tot de planning, de vragen en de avonden.
+    {% else %}Elke paar dagen een kort filosofisch dilemma. Eén keer per maand een avond om erover door te praten.{% endif %}
+  </p>
+</div>
+<form class="card" method="post" action="{{ action }}">
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <label class="field" for="name">Hoe heet je?</label>
+  <input id="name" name="name" type="text" autocomplete="given-name" required maxlength="60" value="{{ name or '' }}" placeholder="Je voornaam" autofocus>
+  <p class="small muted" style="margin-top:10px">Zo zien de anderen je bij de voorspellingen en de avond. Op een nieuw apparaat vul je via deze link dezelfde naam in.</p>
+  <button class="btn" type="submit" style="margin-top:8px">{{ 'Doorgaan' if admin else 'Meedoen' }}</button>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ q.title }} · filosofie app{% endblock %}
+{% block content %}
+<div class="steps" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="{{ 'on' if step == 'friend' }}"></i></div>
+{% if step == 'group' %}
+<form class="card" method="post" action="/vraag/{{ q.id }}/voorspel-groep" data-needs-choice>
+  <div class="eyebrow">Voorspel de groep</div>
+  <h1>Wat kiest de meerderheid?</h1>
+  <p class="muted">{{ q.title }}. Goed ingeschat levert een punt op als de ronde sluit.</p>
+  <div class="choices">
+    {% for o in q.options %}
+    <label class="choice"><input type="radio" name="option_id" value="{{ o.id }}" required><span>{{ o.text }}</span></label>
+    {% endfor %}
+  </div>
+  <button class="btn" type="submit">Voorspellen</button>
+</form>
+{% else %}
+<form class="card" method="post" action="/vraag/{{ q.id }}/voorspel-vriend" data-needs-choice>
+  <input type="hidden" name="target_id" value="{{ friend.id }}">
+  <div class="eyebrow">Voorspel een vriend</div>
+  <h1>Wat denk je dat {{ friend.name }} kiest?</h1>
+  <p class="muted">{{ q.title }}. Je ziet straks alleen of je het goed had, niet wat {{ friend.name }} echt koos.</p>
+  <div class="choices">
+    {% for o in q.options %}
+    <label class="choice"><input type="radio" name="option_id" value="{{ o.id }}" required><span>{{ o.text }}</span></label>
+    {% endfor %}
+  </div>
+  <button class="btn" type="submit">Voorspellen</button>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Vraag bewerken · Beheer{% endblock %}
+{% block content %}
+{% set section = 'vragen' %}{% include "admin/_subnav.html" %}
+<form class="card" method="post" action="/admin/vraag/{{ q.id }}">
+  <label class="field" for="title">Titel</label>
+  <input id="title" name="title" type="text" maxlength="120" value="{{ q.title }}" required>
+  <label class="field" for="scenario">Scenario / vraag</label>
+  <textarea id="scenario" name="scenario">{{ q.scenario }}</textarea>
+  <label class="check"><input type="checkbox" name="active" {{ 'checked' if q.active }}><span>Actief (wordt meegenomen in de planning)</span></label>
+
+  <h3 style="margin-top:18px">Antwoordopties</h3>
+  {% for s in slots %}
+  <div class="opt-edit">
+    <label class="field" for="text_{{ loop.index0 }}">Optie {{ loop.index }}{% if s.answers %} <span class="badge">{{ s.answers }} antwoorden</span>{% endif %}</label>
+    <input id="text_{{ loop.index0 }}" name="text_{{ loop.index0 }}" type="text" maxlength="255" value="{{ s.text }}" placeholder="Leeg laten = geen optie">
+    <input name="reflection_{{ loop.index0 }}" type="text" maxlength="255" value="{{ s.reflection }}" placeholder="Reflectie na het kiezen" style="margin-top:6px" aria-label="Reflectie optie {{ loop.index }}">
+  </div>
+  {% endfor %}
+  <button class="btn" type="submit" style="margin-top:16px">Opslaan</button>
+</form>
+<a class="btn ghost" href="/admin/vragen">Terug</a>
+{% endblock %}

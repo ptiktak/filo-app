@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Planning · Beheer{% endblock %}
+{% block content %}
+{% set section = 'planning' %}{% include "admin/_subnav.html" %}
+
+{% if unscheduled %}
+<form class="card" method="post" action="/admin/planning/genereer">
+  <h2>{{ unscheduled }} vragen inplannen</h2>
+  <label class="field" for="start">Eerste ronde opent op</label>
+  <input id="start" name="start" type="datetime-local" value="{{ default_start }}" required>
+  <div class="row">
+    <div class="grow">
+      <label class="field" for="intervals">Dagen tussen rondes</label>
+      <input id="intervals" name="intervals" type="text" value="2,3" title="Wisselt af: 2,3 = om en om 2 en 3 dagen">
+    </div>
+    <div class="grow">
+      <label class="field" for="per_round">Vragen per ronde</label>
+      <input id="per_round" name="per_round" type="number" min="1" max="5" value="3">
+    </div>
+  </div>
+  <p class="small muted">"2,3" betekent om en om 2 en 3 dagen. Een ronde blijft open tot de volgende opent. Notificaties gaan alleen tussen 9:00 en 21:00.</p>
+  <button class="btn" type="submit">Planning maken</button>
+</form>
+{% endif %}
+
+<div class="card">
+  <h2>Rondes</h2>
+  {% for r in rounds %}
+  <div class="opt-edit">
+    <div class="row" style="justify-content:space-between">
+      <strong>Ronde {{ r.number }}</strong>
+      {% if r.is_open(now) %}<span class="badge good">open</span>{% elif r.is_closed(now) %}<span class="badge">gesloten</span>{% else %}<span class="badge accent">gepland</span>{% endif %}
+    </div>
+    <p class="small muted" style="margin:4px 0">{{ r.opens_at | dt }} → {{ r.closes_at | dt }}{% if r.notified_at %} · melding verstuurd{% endif %}</p>
+    <ul class="small" style="margin:6px 0 8px;padding-left:18px">
+      {% for q in r.questions %}<li>{{ q.title }} <span class="muted">({{ counts.get(q.id, 0) }}/{{ user_total }} antwoorden)</span></li>{% endfor %}
+    </ul>
+    {% if not r.is_closed(now) %}
+    <form class="row" method="post" action="/admin/ronde/{{ r.id }}">
+      <input name="opens_at" type="datetime-local" value="{{ r.opens_at | dt_input }}" style="flex:1;min-width:180px" aria-label="Openingstijd ronde {{ r.number }}">
+      <button class="btn secondary small" type="submit">Verplaats</button>
+    </form>
+    <div class="row" style="margin-top:6px">
+      {% if not r.is_open(now) %}
+      <form method="post" action="/admin/ronde/{{ r.id }}/nu"><button class="btn small" type="submit">Nu openen</button></form>
+      {% endif %}
+      <form method="post" action="/admin/ronde/{{ r.id }}/verwijder" onsubmit="return confirm('Ronde verwijderen? De vragen worden weer ongepland.')"><button class="btn danger small" type="submit">Verwijder</button></form>
+    </div>
+    {% endif %}
+  </div>
+  {% else %}
+  <p class="muted">Nog geen rondes ingepland.</p>
+  {% endfor %}
+</div>
+{% endblock %}

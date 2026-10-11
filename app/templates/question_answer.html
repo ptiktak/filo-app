@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ q.title }} · filosofie app{% endblock %}
+{% block content %}
+<div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+<form class="card" method="post" action="/vraag/{{ q.id }}/antwoord" data-needs-choice>
+  <div class="eyebrow">Ronde {{ q.round.number }}</div>
+  <h1>{{ q.title }}</h1>
+  <p class="scenario">{{ q.scenario }}</p>
+  <fieldset class="choices" style="border:0;padding:0">
+    <legend class="small muted">Kies wat het dichtst bij je komt</legend>
+    {% for o in q.options %}
+    <label class="choice"><input type="radio" name="option_id" value="{{ o.id }}" required><span>{{ o.text }}</span></label>
+    {% endfor %}
+  </fieldset>
+  <label class="field" for="explanation">Waarom? <span class="muted">(optioneel, de anderen zien dit niet)</span></label>
+  <textarea id="explanation" name="explanation" maxlength="140" data-count="exp-count" placeholder="In één zin…" style="min-height:72px"></textarea>
+  <div class="counter" id="exp-count"></div>
+  <button class="btn" type="submit">Antwoord geven</button>
+</form>
+<p class="small muted center">Je antwoord is niet zichtbaar voor de anderen. De groep ziet alleen totalen.</p>
+{% endblock %}

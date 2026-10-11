@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="card banner" data-push-banner href="/installeer" style="text-decoration:none;color:inherit">
+  <strong>Mis geen vragen</strong>
+  <p class="small muted" style="margin:4px 0 0">Zet de app op je beginscherm en zet notificaties aan →</p>
+</a>
+
+{% set todo = current | selectattr("step", "ne", "result") | list %}
+{% if todo %}
+<div class="card hero">
+  <div class="eyebrow">Nu open</div>
+  <h1>{{ todo | length }} {{ 'vraag wacht' if todo | length == 1 else 'vragen wachten' }} op je</h1>
+  <p class="muted">Ronde sluit {{ todo[0].round.closes_at | relative }}.</p>
+  <a class="btn" href="/vraag/{{ todo[0].q.id }}">{{ 'Verder met voorspellen' if todo[0].step != 'answer' else 'Beginnen' }}</a>
+</div>
+{% elif current %}
+<div class="card hero">
+  <div class="eyebrow">Ronde {{ current[0].round.number }}</div>
+  <h1>Alles ingevuld</h1>
+  <p class="muted">{% if upcoming %}Volgende vragen {{ upcoming.opens_at | relative }} ({{ upcoming.opens_at | dt }}).{% else %}Dit waren de laatste vragen van deze reeks.{% endif %}</p>
+</div>
+{% elif upcoming %}
+<div class="card hero">
+  <div class="eyebrow">Even geduld</div>
+  <h1>Volgende vragen {{ upcoming.opens_at | relative }}</h1>
+  <p class="muted">{{ upcoming.opens_at | dt }}. Je krijgt een melding.</p>
+</div>
+{% else %}
+<div class="card hero">
+  <div class="eyebrow">Rustig</div>
+  <h1>Er staan nu geen vragen klaar</h1>
+  <p class="muted">De volgende reeks wordt gepland.</p>
+</div>
+{% endif %}
+
+{% if current %}
+<div class="card">
+  <h2>Deze ronde</h2>
+  <ul class="list">
+    {% for item in current %}
+    <li>
+      <a class="item" href="/vraag/{{ item.q.id }}">{{ item.q.title }}</a>
+      {% if item.step == 'answer' %}<span class="badge accent">Nieuw</span>
+      {% elif item.step != 'result' %}<span class="badge accent">Voorspellen</span>
+      {% else %}<span class="badge good">Klaar</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% if evening %}
+<a class="card" href="/avond" style="display:block;text-decoration:none;color:inherit">
+  <div class="eyebrow">Volgende avond</div>
+  <h2>{{ evening.starts_at | dt }}</h2>
+  <p class="small" style="margin:0">
+    {% if attending is sameas true %}<span class="badge good">Je bent erbij</span>{% elif attending is sameas false %}<span class="badge">Je kunt niet</span>{% else %}<span class="badge accent">Ben je erbij? →</span>{% endif %}
+  </p>
+</a>
+{% endif %}
+
+{% if board_has_points %}
+<div class="card">
+  <h2>Mensenkenners</h2>
+  <p class="small muted">Punten voor het goed inschatten van de groep en van elkaar.</p>
+  {% for u, pts in board %}
+  <div class="leader {{ 'me' if u.id == user.id }}"><span class="rank">{{ loop.index }}</span><span>{{ u.name }}</span><span>{{ pts }}</span></div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if past %}
+<div class="card">
+  <h2>Eerdere vragen</h2>
+  <ul class="list">
+    {% for item in past %}
+    <li>
+      <a class="item" href="/vraag/{{ item.q.id }}/resultaat">{{ item.q.title }}</a>
+      {% if item.answered %}<span class="badge">Uitslag</span>{% else %}<span class="badge">Gemist</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}

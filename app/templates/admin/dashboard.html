@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Beheer · filosofie app{% endblock %}
+{% block content %}
+{% set section = 'overzicht' %}{% include "admin/_subnav.html" %}
+
+<div class="card">
+  <h2>Links delen</h2>
+  <label class="field" for="invite-url">Uitnodigingslink voor vrienden</label>
+  <div class="row" style="flex-wrap:nowrap">
+    <input id="invite-url" type="text" value="{{ invite_url }}" readonly style="flex:1">
+    <button class="btn secondary small" type="button" data-copy="invite-url">Kopieer</button>
+  </div>
+  <label class="field" for="admin-url">Beheerderslink (alleen voor beheerders)</label>
+  <div class="row" style="flex-wrap:nowrap">
+    <input id="admin-url" type="text" value="{{ admin_url }}" readonly style="flex:1">
+    <button class="btn secondary small" type="button" data-copy="admin-url">Kopieer</button>
+  </div>
+  <p class="small muted" style="margin:10px 0 0">Wie de beheerderslink opent, wordt beheerder. Deel die dus niet in de groepsapp.</p>
+</div>
+<script>
+document.querySelectorAll("[data-copy]").forEach((btn) => btn.addEventListener("click", async () => {
+  const input = document.getElementById(btn.dataset.copy);
+  try { await navigator.clipboard.writeText(input.value); } catch (e) { input.select(); document.execCommand("copy"); }
+  btn.textContent = "Gekopieerd";
+  setTimeout(() => (btn.textContent = "Kopieer"), 1500);
+}));
+</script>
+
+<div class="card">
+  <h2>Deelnemers</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Naam</th><th>Antw.</th><th>Push</th><th></th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r.user.name }}{% if r.user.is_admin %} <span class="badge">beheer</span>{% endif %}</td>
+      <td>{{ r.answers }}/{{ question_total }}</td>
+      <td>{{ r.devices or '–' }}</td>
+      <td>
+        {% if r.user.id != user.id %}
+        <form method="post" action="/admin/gebruiker/{{ r.user.id }}/verwijder" onsubmit="return confirm('Deze deelnemer en alle antwoorden verwijderen?')">
+          <button class="btn danger small" type="submit">Verwijder</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4" class="muted">Nog niemand ingelogd. Deel de link en de groepscode.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<form class="card" method="post" action="/admin/melding">
+  <h2>Melding sturen</h2>
+  {% if not push_ok %}<p class="error small">Push staat uit: zet VAPID_PUBLIC_KEY en VAPID_PRIVATE_KEY in de omgeving (zie README).</p>{% endif %}
+  <label class="field" for="title">Titel</label>
+  <input id="title" name="title" type="text" maxlength="80" required placeholder="Vergeet de avond niet!">
+  <label class="field" for="body">Tekst</label>
+  <input id="body" name="body" type="text" maxlength="200">
+  <button class="btn secondary" type="submit" style="margin-top:12px">Naar iedereen sturen</button>
+</form>
+{% endblock %}

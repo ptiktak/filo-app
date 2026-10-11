@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+{% if welcome %}
+<div class="card hero">
+  <div class="eyebrow">Hoi {{ user.name }}</div>
+  <h1>Nog twee stappen</h1>
+  <p class="muted">Zet de app op je beginscherm en zet notificaties aan. Dan krijg je een seintje zodra er nieuwe vragen klaarstaan.</p>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="eyebrow">Stap 1</div>
+  <h2>Op je beginscherm zetten</h2>
+  <div id="installed" hidden><p><span class="badge good">Gelukt</span> Je gebruikt de app al vanaf je beginscherm.</p></div>
+  <div id="ios-steps" hidden>
+    <p><strong>iPhone/iPad</strong> (gebruik Safari):</p>
+    <ol>
+      <li>Tik onderin op het deel-icoon <span aria-hidden="true">(vierkant met pijl omhoog)</span>.</li>
+      <li>Kies <strong>Zet op beginscherm</strong>.</li>
+      <li>Open de app daarna vanaf je beginscherm. Pas dan kun je notificaties aanzetten.</li>
+    </ol>
+  </div>
+  <div id="android-steps" hidden>
+    <p><strong>Android</strong> (Chrome):</p>
+    <ol>
+      <li>Tik rechtsboven op de drie puntjes.</li>
+      <li>Kies <strong>App installeren</strong> of <strong>Toevoegen aan startscherm</strong>.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="card">
+  <div class="eyebrow">Stap 2</div>
+  <h2>Notificaties</h2>
+  <p id="push-status" class="muted">Even kijken…</p>
+  <button class="btn" id="push-on" type="button" hidden>Notificaties aanzetten</button>
+  <button class="btn ghost" id="push-off" type="button" hidden>Notificaties uitzetten</button>
+  <form method="post" action="/push/test" id="push-test" hidden style="margin-top:10px">
+    <button class="btn secondary" type="submit">Stuur een testmelding</button>
+  </form>
+</div>
+
+<a class="btn secondary" href="/">Naar de vragen</a>
+<form method="post" action="/logout" style="margin-top:24px" class="center">
+  <button class="btn ghost small" type="submit">Uitloggen</button>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const F = window.Filosofie;
+  const $ = (id) => document.getElementById(id);
+  if (F.isStandalone) $("installed").hidden = false;
+  else if (F.isIOS) $("ios-steps").hidden = false;
+  else $("android-steps").hidden = false;
+
+  async function refresh() {
+    const state = await F.pushState().catch(() => "unsupported");
+    const texts = {
+      on: "Notificaties staan aan op dit apparaat.",
+      off: "Notificaties staan nog uit.",
+      denied: "Je hebt notificaties geblokkeerd. Zet ze aan via de instellingen van je telefoon of browser.",
+      "needs-install": "Op iPhone werken notificaties pas als je de app eerst op je beginscherm zet (stap 1).",
+      unsupported: "Deze browser ondersteunt geen notificaties.",
+    };
+    $("push-status").textContent = document.body.dataset.vapid ? texts[state] : "Notificaties zijn nog niet ingesteld op de server.";
+    $("push-on").hidden = state !== "off" || !document.body.dataset.vapid;
+    $("push-off").hidden = state !== "on";
+    $("push-test").hidden = state !== "on";
+  }
+  $("push-on").addEventListener("click", async () => {
+    try { await F.enablePush(); } catch (e) { alert(e.message); }
+    refresh();
+  });
+  $("push-off").addEventListener("click", async () => { await F.disablePush(); refresh(); });
+  refresh();
+});
+</script>
+{% endblock %}

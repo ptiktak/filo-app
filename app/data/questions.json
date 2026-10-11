@@ -1,0 +1,442 @@
+[
+  {
+    "title": "Het universum stuurt je een bericht",
+    "scenario": "Je maakt toevallig iets mee wat precies aansluit bij een vraag waar je al weken mee zit. Wat denk je?",
+    "options": [
+      {
+        "text": "Dit kan moeilijk puur toeval zijn.",
+        "reflection": "Jij laat ruimte voor een orde achter het toeval."
+      },
+      {
+        "text": "Het is toeval, maar ik mag er zelf betekenis aan geven.",
+        "reflection": "Jij maakt zelf betekenis van wat je overkomt."
+      },
+      {
+        "text": "Mijn brein zoekt automatisch patronen.",
+        "reflection": "Jij kiest de nuchtere verklaring, ook als die minder magisch is."
+      },
+      {
+        "text": "Ik weet het niet — en juist dat vind ik mooi.",
+        "reflection": "Jij laat het mysterie liever open dan het weg te verklaren."
+      }
+    ]
+  },
+  {
+    "title": "De perfecte simulatie",
+    "scenario": "Je kunt voortaan leven in een simulatie waarin je volmaakt gelukkig bent. Na binnenkomst weet je niet meer dat het een simulatie is. Ga je?",
+    "options": [
+      {
+        "text": "Ja, geluk is uiteindelijk wat telt.",
+        "reflection": "Voor jou telt hoe het leven voelt, niet waar het zich afspeelt."
+      },
+      {
+        "text": "Misschien, als mijn relaties ook echt voelen.",
+        "reflection": "Voor jou staat of valt geluk met echte verbinding."
+      },
+      {
+        "text": "Nee, ik wil liever een moeilijke werkelijkheid.",
+        "reflection": "Jij kiest echtheid boven comfort."
+      },
+      {
+        "text": "Nee, zonder waarheid heeft geluk weinig waarde.",
+        "reflection": "Waarheid is voor jou een waarde op zich, geen middel."
+      }
+    ]
+  },
+  {
+    "title": "Je beste vriend maakt een fout",
+    "scenario": "Je vriend heeft iets moreel verkeerds gedaan, maar niemand is ernstig beschadigd. Wat weegt voor jou het zwaarst?",
+    "options": [
+      {
+        "text": "Of hij goede bedoelingen had.",
+        "reflection": "Jij kijkt naar het hart achter de daad."
+      },
+      {
+        "text": "Welke gevolgen er zijn ontstaan.",
+        "reflection": "Jij beoordeelt een daad op wat hij teweegbrengt."
+      },
+      {
+        "text": "Of hij een duidelijke morele regel heeft overtreden.",
+        "reflection": "Voor jou zijn morele regels geen suggesties."
+      },
+      {
+        "text": "Of hij verantwoordelijkheid neemt en ervan groeit.",
+        "reflection": "Jij kijkt minder naar de fout en meer naar wie iemand wordt."
+      }
+    ]
+  },
+  {
+    "title": "Wat maakt jou nog steeds jou?",
+    "scenario": "Over tien jaar zijn vrijwel al je cellen, overtuigingen en relaties veranderd. Waarom ben je dan nog dezelfde persoon?",
+    "options": [
+      {
+        "text": "Omdat ik hetzelfde bewustzijn ervaar.",
+        "reflection": "Jij zoekt je kern in iets dat dieper ligt dan je lichaam."
+      },
+      {
+        "text": "Door de continuïteit van mijn herinneringen.",
+        "reflection": "Voor jou ben je de draad van wat je hebt meegemaakt."
+      },
+      {
+        "text": "Door het verhaal dat ik over mezelf vertel.",
+        "reflection": "Jij ziet jezelf als een verhaal dat je blijft schrijven."
+      },
+      {
+        "text": "Misschien ben ik helemaal niet werkelijk dezelfde persoon.",
+        "reflection": "Jij durft het idee van een vast 'ik' los te laten."
+      }
+    ]
+  },
+  {
+    "title": "Een belediging",
+    "scenario": "Iemand maakt je publiekelijk belachelijk. Wat is de sterkste reactie?",
+    "options": [
+      {
+        "text": "Niets doen: woorden hebben alleen macht als ik die geef.",
+        "reflection": "Een klassiek stoïcijnse reactie: jij bepaalt wat je raakt."
+      },
+      {
+        "text": "Direct een duidelijke grens stellen.",
+        "reflection": "Jij komt voor jezelf op, zonder omwegen."
+      },
+      {
+        "text": "Eerlijk laten merken dat het me raakt.",
+        "reflection": "Jij kiest eerlijkheid over je gevoel boven een pantser."
+      },
+      {
+        "text": "Proberen te begrijpen waarom hij dit doet.",
+        "reflection": "Jij zoekt eerst de mens achter de aanval."
+      }
+    ]
+  },
+  {
+    "title": "De gelukspil",
+    "scenario": "Er bestaat een veilige pil die je structureel gelukkiger maakt, maar je ambities iets vermindert. Neem je hem?",
+    "options": [
+      {
+        "text": "Meteen.",
+        "reflection": "Jij neemt geluk serieus als doel op zich."
+      },
+      {
+        "text": "Alleen als ik ongelukkig ben.",
+        "reflection": "Jij bent pragmatisch: een middel mag, als het nodig is."
+      },
+      {
+        "text": "Nee, ambitie en strijd horen bij een betekenisvol leven.",
+        "reflection": "Voor jou hoort strijd bij een leven dat ertoe doet."
+      },
+      {
+        "text": "Nee, kunstmatig geluk voelt niet echt.",
+        "reflection": "Jij wilt dat je geluk ergens op gebaseerd is."
+      }
+    ]
+  },
+  {
+    "title": "Vrije wil",
+    "scenario": "Een wetenschapper kan op basis van je hersenen iedere keuze voorspellen voordat jij hem maakt. Ben jij dan nog verantwoordelijk?",
+    "options": [
+      {
+        "text": "Ja, want het blijft mijn keuze.",
+        "reflection": "Jij houdt vast aan de vrije wil, wat de hersenscan ook zegt."
+      },
+      {
+        "text": "Gedeeltelijk: verantwoordelijkheid bestaat in gradaties.",
+        "reflection": "Jij ziet verantwoordelijkheid in tinten grijs."
+      },
+      {
+        "text": "Nee, dan is vrije wil blijkbaar een illusie.",
+        "reflection": "Jij trekt de consequentie: vrije wil is misschien een illusie."
+      },
+      {
+        "text": "Verantwoordelijkheid blijft nuttig, ook als vrije wil niet bestaat.",
+        "reflection": "Jij houdt verantwoordelijkheid overeind, ook zonder vrije wil."
+      }
+    ]
+  },
+  {
+    "title": "De laatste mens op aarde",
+    "scenario": "Je bent de laatste mens. Heeft het dan nog zin om iets moois te maken?",
+    "options": [
+      {
+        "text": "Ja, schoonheid heeft waarde op zichzelf.",
+        "reflection": "Jij gelooft dat schoonheid geen publiek nodig heeft."
+      },
+      {
+        "text": "Ja, zolang ík het kan ervaren.",
+        "reflection": "Voor jou is je eigen ervaring reden genoeg."
+      },
+      {
+        "text": "Alleen als iemand het later zou kunnen vinden.",
+        "reflection": "Voor jou krijgt iets waarde zodra een ander het kan zien."
+      },
+      {
+        "text": "Nee, betekenis ontstaat tussen mensen.",
+        "reflection": "Voor jou bestaat betekenis tussen mensen, niet in dingen."
+      }
+    ]
+  },
+  {
+    "title": "Een leugen die helpt",
+    "scenario": "Een vriend vraagt of hij ergens talent voor heeft. Jij denkt van niet, maar de waarheid zal hem waarschijnlijk laten stoppen. Wat doe je?",
+    "options": [
+      {
+        "text": "Eerlijk zijn.",
+        "reflection": "Jij kiest eerlijkheid, ook als die pijn doet."
+      },
+      {
+        "text": "Hem aanmoedigen zonder letterlijk te liegen.",
+        "reflection": "Jij zoekt de weg tussen eerlijkheid en mildheid."
+      },
+      {
+        "text": "Liegen als dat hem gelukkiger maakt.",
+        "reflection": "Jij weegt zijn geluk zwaarder dan de waarheid."
+      },
+      {
+        "text": "Vragen waarom hij mijn oordeel zo belangrijk vindt.",
+        "reflection": "Jij geeft de vraag terug: zijn pad hangt niet van jouw oordeel af."
+      }
+    ]
+  },
+  {
+    "title": "Wie moet jij worden?",
+    "scenario": "Welke uitspraak spreekt je het meeste aan?",
+    "options": [
+      {
+        "text": "Ik moet ontdekken wie ik werkelijk ben.",
+        "reflection": "Jij gelooft in een ware kern die je kunt vinden."
+      },
+      {
+        "text": "Ik moet mezelf vormen door mijn keuzes.",
+        "reflection": "Een existentialistische kijk: je bent wat je kiest."
+      },
+      {
+        "text": "Ik moet worden wie God of een hogere orde bedoeld heeft.",
+        "reflection": "Jij ziet je leven als deel van een groter plan."
+      },
+      {
+        "text": "Het idee van één 'ware ik' bestaat waarschijnlijk niet.",
+        "reflection": "Jij wantrouwt het idee van één echte jij."
+      }
+    ]
+  },
+  {
+    "title": "De mislukte held",
+    "scenario": "Iemand probeert een kind te redden, maar maakt de situatie per ongeluk erger. Is zijn daad goed?",
+    "options": [
+      {
+        "text": "Ja, vanwege zijn intentie.",
+        "reflection": "Bij jou telt de bedoeling zwaarder dan de afloop."
+      },
+      {
+        "text": "Nee, het resultaat telt.",
+        "reflection": "Jij houdt vast aan de uitkomst, ook als dat hard klinkt."
+      },
+      {
+        "text": "Moedig, maar niet goed uitgevoerd.",
+        "reflection": "Jij scheidt karakter en uitvoering netjes van elkaar."
+      },
+      {
+        "text": "Een daad kan niet simpelweg goed of slecht zijn.",
+        "reflection": "Jij wantrouwt morele hokjes."
+      }
+    ]
+  },
+  {
+    "title": "Een leven zonder tegenslag",
+    "scenario": "Je kunt je kind een leven zonder ernstig verlies, falen of afwijzing geven. Zou je dat doen?",
+    "options": [
+      {
+        "text": "Ja, absoluut.",
+        "reflection": "Jij wilt je kind vooral beschermen."
+      },
+      {
+        "text": "Ja, maar kleine tegenslagen zijn wel nodig.",
+        "reflection": "Jij zoekt de balans tussen bescherming en groei."
+      },
+      {
+        "text": "Nee, zonder lijden ontstaat weinig karakter.",
+        "reflection": "Een stoïcijnse gedachte: tegenslag vormt je."
+      },
+      {
+        "text": "Nee, maar ik zou onnodig lijden wel voorkomen.",
+        "reflection": "Jij accepteert lijden, maar geen zinloos lijden."
+      }
+    ]
+  },
+  {
+    "title": "Wat is echte liefde?",
+    "scenario": "Welke omschrijving komt het dichtst bij jouw idee van echte liefde?",
+    "options": [
+      {
+        "text": "Een gevoel dat je overkomt.",
+        "reflection": "Een romantische blik: liefde overvalt je."
+      },
+      {
+        "text": "Een keuze die je steeds opnieuw maakt.",
+        "reflection": "Voor jou is liefde iets wat je doet, niet alleen voelt."
+      },
+      {
+        "text": "Een diepe herkenning tussen twee mensen.",
+        "reflection": "Een platonische gedachte: liefde als herkenning."
+      },
+      {
+        "text": "Een combinatie van biologie, hechting en cultuur.",
+        "reflection": "Jij kijkt nuchter naar liefde, en vindt haar daardoor niet minder echt."
+      }
+    ]
+  },
+  {
+    "title": "De goede dictator",
+    "scenario": "Een dictator zorgt aantoonbaar voor meer veiligheid, welvaart en geluk dan een democratie, maar burgers hebben weinig vrijheid. Is dat acceptabel?",
+    "options": [
+      {
+        "text": "Ja, als het welzijn aantoonbaar groter is.",
+        "reflection": "Voor jou telt het resultaat voor iedereen het zwaarst."
+      },
+      {
+        "text": "Alleen tijdelijk, in een ernstige crisis.",
+        "reflection": "Jij bent pragmatisch, maar met een noodrem."
+      },
+      {
+        "text": "Nee, vrijheid is niet in te ruilen.",
+        "reflection": "Vrijheid is voor jou een principe, geen ruilmiddel."
+      },
+      {
+        "text": "Nee, niemand kan bepalen wat voor iedereen het goede leven is.",
+        "reflection": "Jij wantrouwt iedereen die weet wat goed is voor een ander."
+      }
+    ]
+  },
+  {
+    "title": "Bestaat een stoel echt?",
+    "scenario": "Welke uitspraak komt het dichtst bij jouw intuïtie?",
+    "options": [
+      {
+        "text": "De stoel bestaat gewoon, onafhankelijk van ons.",
+        "reflection": "Jij bent een nuchtere realist."
+      },
+      {
+        "text": "Alleen het materiaal bestaat; 'stoel' is een menselijk concept.",
+        "reflection": "Jij ziet 'stoel' als een label dat wij op materie plakken."
+      },
+      {
+        "text": "De perfecte vorm 'stoel' bestaat als abstract idee.",
+        "reflection": "Pure Plato: de idee van de stoel is echter dan elke stoel."
+      },
+      {
+        "text": "Iets bestaat voor ons door de manier waarop we het ervaren.",
+        "reflection": "Voor jou begint werkelijkheid bij ervaring."
+      }
+    ]
+  },
+  {
+    "title": "Een vriend verandert volledig",
+    "scenario": "Een goede vriend krijgt totaal andere waarden, interesses en overtuigingen. Wat is jullie vriendschap dan nog waard?",
+    "options": [
+      {
+        "text": "Onze gedeelde geschiedenis blijft waardevol.",
+        "reflection": "Voor jou is vriendschap trouw aan een gedeeld verleden."
+      },
+      {
+        "text": "Vriendschap vraagt ook overeenstemming over kernwaarden.",
+        "reflection": "Voor jou vraagt vriendschap ook een gedeelde moraal."
+      },
+      {
+        "text": "Als we elkaar blijven begrijpen, kan ze blijven bestaan.",
+        "reflection": "Voor jou draait vriendschap om begrip, niet om gelijk denken."
+      },
+      {
+        "text": "Relaties mogen eindigen wanneer mensen veranderen.",
+        "reflection": "Jij laat relaties los zonder er drama van te maken."
+      }
+    ]
+  },
+  {
+    "title": "De zin van het leven",
+    "scenario": "Welke uitspraak voelt het minst onwaar?",
+    "options": [
+      {
+        "text": "Het leven heeft een bedoeling die we kunnen ontdekken.",
+        "reflection": "Jij gelooft dat er een zin te vinden valt."
+      },
+      {
+        "text": "Het leven heeft geen ingebouwde zin; wij maken die zelf.",
+        "reflection": "Klassiek existentialisme: zin maak je zelf."
+      },
+      {
+        "text": "Zingeving ontstaat door liefde en verbondenheid.",
+        "reflection": "Voor jou ontstaat zin tussen mensen."
+      },
+      {
+        "text": "De vraag naar één grote zin is verkeerd gesteld.",
+        "reflection": "Jij wantrouwt de vraag zelf."
+      }
+    ]
+  },
+  {
+    "title": "Rechtvaardigheid of genade?",
+    "scenario": "Iemand pleegt een misdaad na een jeugd vol misbruik en verwaarlozing. Wat verdient hij?",
+    "options": [
+      {
+        "text": "Een passende straf: zijn verleden verandert de daad niet.",
+        "reflection": "Jij houdt vast aan rechtvaardigheid en persoonlijke verantwoordelijkheid."
+      },
+      {
+        "text": "Straf, maar duidelijk verminderd door zijn omstandigheden.",
+        "reflection": "Jij weegt schuld en omstandigheden allebei mee."
+      },
+      {
+        "text": "Vooral behandeling en herstel.",
+        "reflection": "Jij ziet de mens achter de misdaad."
+      },
+      {
+        "text": "Wat de samenleving het beste beschermt en herstelt.",
+        "reflection": "Jij kijkt naar wat het beste uitpakt voor iedereen."
+      }
+    ]
+  },
+  {
+    "title": "De onbekende weldoener",
+    "scenario": "Je kunt honderd mensen enorm helpen, maar niemand zal ooit weten dat jij het hebt gedaan. Doe je het?",
+    "options": [
+      {
+        "text": "Natuurlijk; erkenning is irrelevant.",
+        "reflection": "Jij doet het goede zonder dat iemand toekijkt."
+      },
+      {
+        "text": "Ja, maar eerlijk gezegd zou ik waardering missen.",
+        "reflection": "Eerlijk: goed doen en gezien willen worden gaan bij jou samen."
+      },
+      {
+        "text": "Alleen als het me niet te veel kost.",
+        "reflection": "Jij bent realistisch over wat je kunt geven."
+      },
+      {
+        "text": "Ik weet het niet — gezien worden motiveert mij sterk.",
+        "reflection": "Jij durft toe te geven dat erkenning telt."
+      }
+    ]
+  },
+  {
+    "title": "De berg",
+    "scenario": "Je werkt jarenlang aan een doel en ontdekt vlak voor het einde dat het niemand iets oplevert. Maak je het af?",
+    "options": [
+      {
+        "text": "Ja, ik heb me eraan verbonden.",
+        "reflection": "Voor jou is een belofte aan jezelf ook een belofte."
+      },
+      {
+        "text": "Alleen als het proces voor mij waarde heeft.",
+        "reflection": "Voor jou zit de waarde in de weg, niet in de top."
+      },
+      {
+        "text": "Nee, ik besteed mijn tijd liever nuttiger.",
+        "reflection": "Jij bent nuchter: tijd is te kostbaar voor zinloze doelen."
+      },
+      {
+        "text": "Eerst onderzoeken waarom ik het doel eigenlijk wilde bereiken.",
+        "reflection": "Jij stelt eerst de vraag achter de vraag."
+      }
+    ]
+  }
+]

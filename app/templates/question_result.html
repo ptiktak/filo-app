@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}{{ q.title }} · filosofie app{% endblock %}
+{% macro outcome_badge(o) -%}
+  {% if o.status == 'correct' %}<span class="badge good">Goed! +1</span>
+  {% elif o.status == 'wrong' %}<span class="badge bad">Mis</span>
+  {% elif o.status == 'void' %}<span class="badge">Telt niet</span>
+  {% else %}<span class="badge">Uitslag na sluiting</span>{% endif %}
+{%- endmacro %}
+{% block content %}
+{% if answer %}
+<div class="card hero">
+  <div class="eyebrow">{{ q.title }}</div>
+  <p class="reflection">{{ answer.option.reflection or "Interessante keuze." }}</p>
+  {% if dist.visible %}
+  <p class="muted" style="margin:0">{{ same_pct }}% van de groep koos hetzelfde.</p>
+  {% endif %}
+</div>
+{% else %}
+<div class="card">
+  <div class="eyebrow">Gemist</div>
+  <h1>{{ q.title }}</h1>
+  <p class="muted">Deze vraag heb je niet beantwoord voordat de ronde sloot.</p>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>Wat de groep koos</h2>
+  {% if not answer %}<p class="scenario" style="font-size:1rem">{{ q.scenario }}</p>{% endif %}
+  {% if dist.visible %}
+  <div class="bars">
+    {% for o in q.options %}
+    {% set pct = dist.pct(o.id) %}
+    <div class="bar {{ 'mine' if answer and answer.option_id == o.id }}">
+      <div class="label"><span>{{ o.text }}</span><span>{{ pct }}%</span></div>
+      <div class="track"><div class="fill" style="width: {{ pct }}%"></div></div>
+    </div>
+    {% endfor %}
+  </div>
+  <p class="small muted">{{ dist.total }} antwoorden{% if not closed %} tot nu toe{% endif %}.</p>
+  {% else %}
+  <p class="muted">De groepsuitslag verschijnt vanaf {{ dist.total + missing }} antwoorden. Nog {{ missing }} te gaan. Kom later terug!</p>
+  {% if answer %}<p class="small">Jouw keuze: <strong>{{ answer.option.text }}</strong></p>{% endif %}
+  {% endif %}
+</div>
+
+{% if group or friend %}
+<div class="card">
+  <h2>Je voorspellingen</h2>
+  {% if group %}
+  <div class="row" style="margin-bottom:10px">
+    <div class="grow"><div class="small muted">Meerderheid</div>{{ group.option_text }}</div>
+    {{ outcome_badge(group) }}
+  </div>
+  {% endif %}
+  {% if friend %}
+  <div class="row">
+    <div class="grow"><div class="small muted">{{ friend.target_name }}</div>{{ friend.option_text }}</div>
+    {{ outcome_badge(friend) }}
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if next_q %}
+<a class="btn" href="/vraag/{{ next_q.id }}">Volgende vraag</a>
+{% else %}
+<a class="btn secondary" href="/">Terug naar overzicht</a>
+{% endif %}
+{% endblock %}
