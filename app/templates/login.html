@@ -5,8 +5,12 @@
   <h1>Een maand lang denken, één avond praten.</h1>
   <p class="muted" style="margin:0">Elke paar dagen een kort filosofisch dilemma. Eén keer per maand een avond om erover door te praten.</p>
 </div>
-<div class="card">
+<form class="card" method="post" action="/login">
   <h2>Je hebt een uitnodigingslink nodig</h2>
-  <p class="muted" style="margin:0">Open de link die in de groepsapp gedeeld is. Op een nieuw apparaat gebruik je dezelfde link en vul je dezelfde naam in.</p>
-</div>
+  <p class="muted">Open de link uit de groepsapp, of plak hem hieronder. Gebruik daarna dezelfde naam als eerder.</p>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <label class="field" for="link">Uitnodigingslink</label>
+  <input id="link" name="link" type="url" inputmode="url" autocomplete="off" required value="{{ link or '' }}" placeholder="https://…/uitnodiging/…">
+  <button class="btn" type="submit" style="margin-top:12px">Doorgaan</button>
+</form>
 {% endblock %}

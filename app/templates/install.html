@@ -15,9 +15,11 @@
   <div id="ios-steps" hidden>
     <p><strong>iPhone/iPad</strong> (gebruik Safari):</p>
     <ol>
-      <li>Tik onderin op het deel-icoon <span aria-hidden="true">(vierkant met pijl omhoog)</span>.</li>
-      <li>Kies <strong>Zet op beginscherm</strong>.</li>
-      <li>Open de app daarna vanaf je beginscherm. Pas dan kun je notificaties aanzetten.</li>
+      <li>Kopieer eerst je inloglink. De app op je beginscherm deelt de inlog niet met Safari, dus je moet daar één keer opnieuw inloggen.
+        <div style="margin:8px 0 4px"><button class="btn secondary small" type="button" id="copy-login">Kopieer je inloglink</button></div></li>
+      <li>Tik onderin op het deel-icoon <span aria-hidden="true">(vierkant met pijl omhoog)</span> en kies <strong>Zet op beginscherm</strong>.</li>
+      <li>Open de app vanaf je beginscherm, plak de link en vul dezelfde naam in.</li>
+      <li>Zet daarna hieronder de notificaties aan. Op iPhone kan dat alleen vanuit de app op het beginscherm.</li>
     </ol>
   </div>
   <div id="android-steps" hidden>
@@ -72,6 +74,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     refresh();
   });
   $("push-off").addEventListener("click", async () => { await F.disablePush(); refresh(); });
+  $("copy-login").addEventListener("click", async (e) => {
+    const link = {{ login_link | tojson }};
+    try { await navigator.clipboard.writeText(link); e.target.textContent = "Gekopieerd ✓"; }
+    catch (err) { prompt("Kopieer deze link:", link); }
+  });
   refresh();
 });
 </script>

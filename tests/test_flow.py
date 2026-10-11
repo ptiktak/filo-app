@@ -58,6 +58,12 @@ def test_links():
         assert c.post("/beheer/fout", data={"name": "Mallory"}).status_code == 404
         assert "uitnodigingslink nodig" in c.get("/login").text
         assert "Hoe heet je?" in c.get("/uitnodiging/vrienden-token").text
+        # Geplakte link op het inlogscherm (iOS-beginscherm-app)
+        r = c.post("/login", data={"link": "https://x.up.railway.app/uitnodiging/vrienden-token"}, follow_redirects=False)
+        assert r.headers["location"] == "/uitnodiging/vrienden-token"
+        r = c.post("/login", data={"link": "https://x/beheer/beheer-token "}, follow_redirects=False)
+        assert r.headers["location"] == "/beheer/beheer-token"
+        assert "werkt niet" in c.post("/login", data={"link": "https://x/uitnodiging/fout"}).text
 
 
 def test_friend_link_cannot_take_admin_name(clients):

@@ -1,4 +1,5 @@
 import hmac
+import re
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from fastapi.responses import RedirectResponse
@@ -74,6 +75,19 @@ def login_info(request: Request, user: User | None = Depends(current_user)):
     return render(request, "login.html")
 
 
+@router.post("/login")
+def login_with_link(request: Request, link: str = Form("")):
+    """Een geplakte uitnodigingslink doorsturen. Nodig voor de app op het iOS-beginscherm,
+    die de inlog van Safari niet deelt en waar je geen adres kunt intypen."""
+    match = re.search(r"/(uitnodiging|beheer)/([A-Za-z0-9_\-]+)", link.strip())
+    if match:
+        kind, token = match.groups()
+        expected = config.INVITE_TOKEN if kind == "uitnodiging" else config.ADMIN_TOKEN
+        if hmac.compare_digest(token, expected):
+            return RedirectResponse(f"/{kind}/{token}", status_code=303)
+    return render(request, "login.html", error="Deze link werkt niet. Kopieer de hele link uit de groepsapp.", link=link)
+
+
 @router.post("/logout")
 def logout(request: Request):
     request.session.clear()
@@ -82,4 +96,6 @@ def logout(request: Request):
 
 @router.get("/installeer")
 def install(request: Request, user: User = Depends(require_user)):
-    return render(request, "install.html", user, welcome=request.query_params.get("welkom") == "1")
+    base = str(request.base_url).rstrip("/")
+    login_link = f"{base}/beheer/{config.ADMIN_TOKEN}" if user.is_admin else f"{base}/uitnodiging/{config.INVITE_TOKEN}"
+    return render(request, "install.html", user, welcome=request.query_params.get("welkom") == "1", login_link=login_link)
